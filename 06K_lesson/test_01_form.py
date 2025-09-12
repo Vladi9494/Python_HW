@@ -18,19 +18,15 @@
 # 4. Проверьте (assert), что поле Zip code подсвечено красным.
 # 5. Проверьте (assert), что остальные поля подсвечены зеленым.
 
-# import pytest
-# from time import sleep
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service as EdgeService
-# from webdriver_manager.microsoft import EdgeChromiumDriverManager
+
 
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-
-# driver = webdriver.Edge(service=EdgeService(
-#    EdgeChromiumDriverManager().install()))
 
 
 def test_data_types():
@@ -71,17 +67,7 @@ def test_data_types():
 
     search_input = driver.find_element(By.NAME, "company")
     search_input.send_keys("SkyPro")
-    # company = WebDriverWait(driver, 20).until(
-    # EC.visibility_of_element_located(
-    # (By.NAME, "company"))).send_keys("SkyPro")
-
     print("Поля заполнены")
-    # $x(By.XPATH, "//button[@type='submit']")
-    # $$(By.CSS_SELECTOR, "button[class='btn btn-outline-primary mt-3']")
-    # Проверка кликабельности кнопки "Submit"
-    # button = WebDriverWait(driver, 20).until(EC.element_to_be_clickable(
-    # $x(By.XPATH, "//button[@type='submit']")))
-    # $$("html.h-100")
     # Прокрутка вниз
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     print("прокрутка вниз выполнена")
@@ -90,12 +76,6 @@ def test_data_types():
     print('Кнопка "Submit" найдена')
     print("Кнопка 'Submit' нажата")
     print("Страница с подсветкой полей открыта")
-    # wait = WebDriverWait(driver,10)
-    # element = wait.until(EC.element_to_be_clickable(
-    #     (By.XPATH, "//button[@type='submit']")))
-    # element.click()
-    # button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-    #      (By.XPATH, f"//button[@type='submit']"))).click()
     try:
         button = WebDriverWait(driver, 20).until(
            EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']"))
@@ -108,9 +88,6 @@ def test_data_types():
                                          "arguments[0]).borderColor;",
                                          zip_code_field)
     assert border_color == "rgb(245, 194, 199)"
-    # zip_fild = driver.find_element(By.ID, "zip-code")
-    # zip_color = zip_fild.value_of_css_property("border-color")
-    # assert zip_color == "rgb(245, 194, 199)"
     zip_fields = ["first-name", "last-name", "address", "e-mail", "phone",
                   "city", "country", "job-position", "company"]
     for zip_field in zip_fields:
@@ -119,13 +96,3 @@ def test_data_types():
             ).value_of_css_property("border-color")
     assert zip_fields == "rgb(186, 219, 204)"
     driver.quit()
-
-    # zip_fields = ["first-name", "last-name", "address", "e-mail", "phone",
-    #               "city", "country", "job-position", "company"]
-    # for zip_field in zip_fields:
-    #     element_color = driver.find_element(
-    #         By.ID, zip_field
-    #         ).value_of_css_property("border-color")
-    #     assert zip_field == "rgb(186, 219, 204)"
-    #     f'Пришел цвет {element_color} у элементов {zip_fields}'
-    # driver.quit()
