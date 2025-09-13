@@ -18,7 +18,6 @@
 # 4. Проверьте (assert), что поле Zip code подсвечено красным.
 # 5. Проверьте (assert), что остальные поля подсвечены зеленым.
 
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.edge.service import Service as EdgeService
@@ -77,22 +76,22 @@ def test_data_types():
     print("Кнопка 'Submit' нажата")
     print("Страница с подсветкой полей открыта")
     try:
-        button = WebDriverWait(driver, 20).until(
+        button = WebDriverWait(driver, 0.01).until(
            EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']"))
             ).click()
     except TimeoutException:
         print("Кнопка не кликабельна в течение указанного времени ожидания")
 
-    zip_code_field = driver.find_element(By.ID, "zip-code")
-    border_color = driver.execute_script("return window.getComputedStyle("
-                                         "arguments[0]).borderColor;",
-                                         zip_code_field)
-    assert border_color == "rgb(245, 194, 199)"
-    zip_fields = ["first-name", "last-name", "address", "e-mail", "phone",
-                  "city", "country", "job-position", "company"]
+        zip_fild = driver.find_element(By.ID, "zip-code")
+    zip_color = zip_fild.value_of_css_property("border-color")
+    assert zip_color == "rgb(245, 194, 199)"
+
+    zip_fields = ["first-name", "last-name", "address", "city", "country",
+                  "e-mail", "phone", "job-position", "company"]
     for zip_field in zip_fields:
         zip_fields = driver.find_element(
             By.CSS_SELECTOR, ".alert-success"
             ).value_of_css_property("border-color")
-    assert zip_fields == "rgb(186, 219, 204)"
+    assert zip_fields == "rgb(186, 219, 204)", f'Пришел цвет {
+        zip_field} у элементов {zip_fields}'
     driver.quit()
