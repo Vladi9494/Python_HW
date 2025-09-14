@@ -86,12 +86,13 @@ def test_data_types():
     zip_color = zip_fild.value_of_css_property("border-color")
     assert zip_color == "rgb(245, 194, 199)"
 
-    zip_fields = ["first-name", "last-name", "address", "city", "country",
-                  "e-mail", "phone", "job-position", "company"]
+    zip_fields = ["first-name", "last-name", "address", "e-mail", "phone",
+                  "city", "country", "job-position", "company"]
     for zip_field in zip_fields:
-        zip_fields = driver.find_element(
-            By.CSS_SELECTOR, ".alert-success"
+        element_color = driver.find_element(
+            By.ID, zip_field
             ).value_of_css_property("border-color")
-    assert zip_fields == "rgb(186, 219, 204)", f'Пришел цвет {
-        zip_field} у элементов {zip_fields}'
+        assert element_color == "rgb(186, 219, 204)", f'Пришел цвет {
+            element_color} у элемента {zip_field}'
     driver.quit()
+
