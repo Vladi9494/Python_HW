@@ -1,0 +1,40 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+def test_calculator():
+    driver = webdriver.Chrome(service=ChromeService(
+        ChromeDriverManager().install()))
+    driver.maximize_window()
+
+    driver.get(
+       "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
+
+    print("Сайт 'Slow calculator' открыт")
+    fild_delay = driver.find_element(By.CSS_SELECTOR, "#delay")
+    fild_delay.clear()
+    print("Поле 'delay' найдено и очищено от предыдущих записей")
+    fild_delay.send_keys("45")
+    print("B поле'delay'введено значение 45")
+
+    driver.find_element(By.XPATH, "//*[@class='keys']/span[1]").click()
+    print("Кнопка '7' найдена и нажата")
+    driver.find_element(By.XPATH, "//*[@class='keys']/span[4]").click()
+    print("Кнопка '+' найдена и нажата")
+    driver.find_element(By.XPATH, "//*[@class='keys']/span[2]").click()
+    print("Кнопка '8' найдена и нажата")
+    driver.find_element(By.XPATH, "//*[@class='keys']/span[15]").click()
+    print("Кнопка '=' найдена и нажата")
+
+    WebDriverWait(driver, 45).until(EC.text_to_be_present_in_element((
+        By.CSS_SELECTOR, "[class = 'screen']"), '15'))
+    res = driver.find_element(By.CSS_SELECTOR, "[class = 'screen']").text
+    assert res == "15"
+    print("сумма = " + res)
+
+    driver.quit()
