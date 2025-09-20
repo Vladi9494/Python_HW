@@ -29,11 +29,6 @@ class CalcPage:
         self.driver = driver
         self.wait = WebDriverWait(driver, 6)
 
-    def open(self):
-        self.driver.get(
-         "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html"
-        )
-
     def setting_waiting(self):
         self.driver.find_element(By.CSS_SELECTOR, "#delay").clear()
         self.driver.find_element(By.CSS_SELECTOR, "#delay").send_keys("45")
@@ -47,6 +42,7 @@ class CalcPage:
             By.XPATH, "//*[@class='keys']/span[2]").click()
         self.driver.find_element(
             By.XPATH, "//*[@class='keys']/span[15]").click()
+        # Ожидание перед извлечением результата
         WebDriverWait(self.driver, 45).until(
             EC.text_to_be_present_in_element((
                 By.CSS_SELECTOR, "[class = 'screen']"), "15"))
