@@ -33,6 +33,12 @@ class CalcPage:
             By.CSS_SELECTOR, "[class = 'screen']").text
         return res == "15"
 
+        # Поиск элемента и извлечние текста
+    def get_result(self):
+        result = self.driver.find_element(
+            By.CSS_SELECTOR, "[class = 'screen']")
+
+        return result.text
+
     def close_driver(self):
         self.driver.quit()
-
