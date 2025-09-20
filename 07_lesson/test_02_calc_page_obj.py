@@ -13,8 +13,6 @@
 # результат 15 через 45 секунд.
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import pytest
 from selenium import webdriver
 from CalcPage import CalcPage
@@ -25,13 +23,15 @@ def driver():
     driver = webdriver.Chrome()
     driver.implicitly_wait(4)
     driver.maximize_window()
+    driver.get(
+         "https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html"
+        )
     yield driver
     driver.quit()
 
 
 def test_calclator(driver):
     calc_page = CalcPage(driver)
-    calc_page.open()
     calc_page.setting_waiting()
     calc_page.calculator_buttons()
     calc_page.result()
@@ -41,10 +41,6 @@ def test_calclator(driver):
     # Поиск элемента и извлечние текста
     result_element = driver.find_element(By.CSS_SELECTOR, "[class = 'screen']")
     result = result_element.text.strip()
-
-    # Ожидание перед извлечением результата
-    WebDriverWait(driver, 45).until(EC.text_to_be_present_in_element((
-        By.CSS_SELECTOR, "[class = 'screen']"), "15"))
 
     # Проверка результата
     result_element = driver.find_element(By.CSS_SELECTOR, "[class = 'screen']")
