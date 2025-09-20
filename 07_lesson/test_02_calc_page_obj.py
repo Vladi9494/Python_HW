@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 import pytest
 from selenium import webdriver
 from CalcPage import CalcPage
@@ -23,16 +22,7 @@ def test_calclator(driver):
     calc_page.result()
     # Ожидание перед извлечением результата
     result = calc_page.result()
-
-    # Поиск элемента и извлечние текста
-    result_element = driver.find_element(
-        By.CSS_SELECTOR, "[class = 'screen']")
-    result = result_element.text.strip()
-
-    # Проверка результата
-    result_element = driver.find_element(
-        By.CSS_SELECTOR, "[class = 'screen']")
-    result = result_element.text.strip()
+    result = calc_page.get_result()
     assert result == "15"
 
     calc_page.close_driver()
