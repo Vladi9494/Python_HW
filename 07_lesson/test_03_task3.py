@@ -1,5 +1,3 @@
-
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -26,54 +24,63 @@ def test_shop():
     password_field = driver.find_element(By.ID, "password")
     password_field.send_keys("secret_sauce")
     print("введены данные 'tandard_user' и пароль 'standard_user'")
-    login_button = driver.find_element(By.ID, "login-button")
+    login_button = driver.find_element(
+        By.ID, "login-button")
     login_button.click()
     print("Кнопка'Login' нажата")
     # Ожидание загрузки страницы с товарами
     WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "inventory_item")))
+        EC.presence_of_element_located((
+            By.CLASS_NAME, "inventory_item")))
 
-    # Добавление товаров в корзину
-    sleep(3)
-    add_button = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
-    # add_button.click()
-    sleep(2)
+    # Добавление товаров в корзину    
+    add_button = driver.find_element(
+        By.ID, "add-to-cart-sauce-labs-backpack").click()
     print("Выбран первый товар 'Sauce Labs Backpack'")
     add_button = driver.find_element(
         By.ID, "add-to-cart-sauce-labs-bolt-t-shirt")
     add_button.click()
     print("Выбран второй товар 'Sauce Labs Bolt T-Shirt'")
     driver.execute_script("window.scrollTo(0, 500)")  # Прокрутка вниз
-    add_button = driver.find_element(By.ID, "add-to-cart-sauce-labs-onesie")
+    add_button = driver.find_element(
+        By.ID, "add-to-cart-sauce-labs-onesie")
     add_button.click()
     print("Выбран третий товар 'Sauce Labs Onesie'")
     # Проверка товаров в корзине
-    cart_badge = driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
+    cart_badge = driver.find_element(
+        By.CLASS_NAME, "shopping_cart_badge")
     assert cart_badge.text == "3", "В корзине должно быть 3 товара"
 
     # Переход в корзину
-    cart_button = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
+    cart_button = driver.find_element(
+        By.CLASS_NAME, "shopping_cart_link")
     cart_button.click()
 
     # Ожидание загрузки страницы корзины
     WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "cart_item")))
+        EC.presence_of_element_located((
+            By.CLASS_NAME, "cart_item")))
 
     # Нажатие кнопки "Checkout"
-    checkout_button = driver.find_element(By.ID, "checkout")
+    checkout_button = driver.find_element(
+        By.ID, "checkout")
     checkout_button.click()
     print("Кнопка 'Checkout' нажата")
 
     # Проверка кликабельности кнопки "Корзина"
-    basket = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((
-        By.CSS_SELECTOR, "a.shopping_cart_link")))
-    basket = driver.find_element(By.CSS_SELECTOR, "a.shopping_cart_link")
+    basket = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((
+            By.CSS_SELECTOR, "a.shopping_cart_link")))
+    basket = driver.find_element(
+        By.CSS_SELECTOR, "a.shopping_cart_link")
     basket.click()
 
     # Проверка кликабельности кнопки "Checkout"
-    checkout = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((
-        By.CSS_SELECTOR, "[id='checkout']")))
-    checkout = driver.find_element(By.CSS_SELECTOR, "[id='checkout']")
+    checkout = WebDriverWait(driver, 20).until(
+        EC.element_to_be_clickable((
+            By.CSS_SELECTOR, "[id='checkout']")))
+    checkout = driver.find_element(
+        By.CSS_SELECTOR, "[id='checkout']")
     checkout.click()
 
     # Заполнение формы checkout своими данными
@@ -102,3 +109,4 @@ def test_shop():
 
     # Проверка итоговой стоимости
     assert text_prise_value == 58.29
+
