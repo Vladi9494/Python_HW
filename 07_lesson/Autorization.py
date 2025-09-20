@@ -11,10 +11,14 @@ class Autorization:
         self.driver = driver
 
     def input_login(self):
-        self.driver.find_element(By.ID, "user-name").send_keys("standard_user")
-        self.driver.find_element(By.ID, "password").send_keys("secret_sauce")
-        self.driver.find_element(By.ID, "login-button").click()
+        self.driver.find_element(
+            By.ID, "user-name").send_keys("standard_user")
+        self.driver.find_element(
+            By.ID, "password").send_keys("secret_sauce")
+        self.driver.find_element(
+            By.ID, "login-button").click()
         print("Кнопка 'Login' нажата")
         # Ожидание загрузки страницы с товарами
         WebDriverWait(self.driver, 5).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "inventory_item")))
+            EC.presence_of_element_located((
+                By.CLASS_NAME, "inventory_item")))
