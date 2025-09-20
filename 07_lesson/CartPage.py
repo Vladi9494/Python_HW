@@ -16,14 +16,17 @@ class CartPage:
         # Проверка кликабельности кнопки "Checkout"
         checkout = WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable((By.ID, "checkout")))
-        checkout = self.driver.find_element(By.ID, "checkout")
+        checkout = self.driver.find_element(
+            By.ID, "checkout")
         checkout.click()
         print("Кнопка 'Checkout' нажата")
 
         # проверка содержимого корзины
     def cart_contents(self):
-        self.driver.find_element(By.CLASS_NAME, "shopping_cart_link").click()
-        self.driver.find_element(By.CLASS_NAME, "shopping_cart_badge")
+        self.driver.find_element(
+            By.CLASS_NAME, "shopping_cart_link").click()
+        self.driver.find_element(
+            By.CLASS_NAME, "shopping_cart_badge")
         items = self.driver.find_elements(
             By.CSS_SELECTOR, "div.cart_item_label")
         content = "\n".join([item.text for item in items])
