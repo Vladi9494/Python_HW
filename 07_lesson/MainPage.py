@@ -27,6 +27,11 @@ class MainPage:
         button = self._driver.execute_script(
             "window.scrollTo(500, 0)")  # прокрутка вверх
 
+    def cart_badge(self):
+        cart_badge = self._driver.find_element(
+            By.CLASS_NAME, "shopping_cart_badge")
+        return cart_badge.text
+
     def go_to_cart(self):
         # Проверка кликабельности кнопки "Корзина"
         basket = WebDriverWait(self._driver, 20).until(
