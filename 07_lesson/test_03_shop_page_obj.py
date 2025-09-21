@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.service import Service as FirefoxService
 import pytest
 from selenium import webdriver
@@ -28,9 +27,9 @@ def test_shop_flow(driver):
     main_page = MainPage(driver)
     main_page.add_to_cart()
     # Проверка товаров в корзине
-    cart_badge = driver.find_element(
-        By.CLASS_NAME, "shopping_cart_badge")
-    assert cart_badge.text == "3", "В корзине должно быть 3 товара"
+
+    cart_badge = main_page.cart_badge()
+    assert cart_badge == "3", "В корзине должно быть 3 товара"
     # Переход в корзину
     main_page.go_to_cart()
     # Нажать кнопку Checkout
@@ -46,3 +45,4 @@ def test_shop_flow(driver):
     total_price = checkout_page.get_total_price()
     driver.quit()
     assert total_price == 58.29
+
