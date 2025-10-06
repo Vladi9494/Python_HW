@@ -12,7 +12,7 @@ import allure
 class CheckoutPage:
     def __init__(self, driver):
         """
-        Конструктор класса CheckoutPage.        
+        Конструктор класса CheckoutPage.
         """
         self.driver = driver
 
@@ -20,7 +20,8 @@ class CheckoutPage:
                  " и нажатие кнопки 'continue'")
     def input_info(self):
         """
-        Заполняет форму 'checkout'личными данными 'first-name', 'last-name', 'post-code',
+        Заполняет форму 'checkout'личными данными 'first-name',
+        'last-name', 'post-code',
         ожидает кликабельности кнопки 'continue',
         нажимает на кнопку 'continue'
           {password} и нажатие кнопки {login-button},
@@ -29,7 +30,7 @@ class CheckoutPage:
         :param: driver: int - время задержки в секундах
         выводит в консоль сообщение, о том что кнопка 'Сontinue' нажата,
         скроллинг страницы вверх.
-        """       
+        """
         self.driver.find_element(
             By.CSS_SELECTOR, "[id='first-name']").send_keys("Владимир")
 
@@ -56,7 +57,7 @@ class CheckoutPage:
         Выводит в консоль итоговую стоимость заказа с экрана ПК.
         :param: str - текст итоговой стоимости заказа в долларах
         """
-        # Чтение итоговой стоимости        
+        # Чтение итоговой стоимости
         text_prise = self.driver.find_element(
             By.CSS_SELECTOR, "div.summary_total_label").text
         text_prise_value = float(text_prise.split("$")[1])
