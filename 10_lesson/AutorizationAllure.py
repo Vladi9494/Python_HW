@@ -10,7 +10,7 @@ import allure
 class Autorization:
     def __init__(self, driver):
         """
-        Конструктор класса Autorization.        
+        Конструктор класса Autorization.
         """
         self.driver = driver
 
