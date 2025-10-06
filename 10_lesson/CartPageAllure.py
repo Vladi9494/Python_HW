@@ -10,7 +10,7 @@ import allure
 class CartPage:
     def __init__(self, driver):
         """
-        Конструктор класса CartPage.        
+        Конструктор класса CartPage.
         """
         self.driver = driver
 
@@ -22,7 +22,7 @@ class CartPage:
         нажимает на кнопку 'checkout',
         выводит в консоль сообщение,
           о том что кнопка 'checkout' нажата
-        """        
+        """
         checkout = WebDriverWait(self.driver, 20).until(
             EC.element_to_be_clickable((By.ID, "checkout")))
         checkout = self.driver.find_element(
@@ -30,7 +30,7 @@ class CartPage:
         checkout.click()
         print("Кнопка 'Checkout' нажата")
 
-    @allure.step("Получение списка и количества товаров в корзине")    
+    @allure.step("Получение списка и количества товаров в корзине")
     def cart_contents(self):
         """
         Возвращает список и количество добавленных товаров на экран.
